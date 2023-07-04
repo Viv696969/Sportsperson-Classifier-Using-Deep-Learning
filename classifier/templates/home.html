@@ -1,0 +1,61 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<br>
+<div class="alert alert-light" role="alert">
+  <center> <h5>Try one of the sample images below</h5></center>
+  </div>
+<form method="post">
+    {% csrf_token %}
+  <div class="row gy-3 my-3">
+    {% for img in images %}
+
+    <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="card">
+            
+            
+            <img src="{{img.image.url}}" alt="{{img.name}}"  height="250px">
+            <button name="imgurl" value="{{img.image.url}}" type="submit" class="btn btn-outline-success">TRY</button>
+                
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+</form>
+
+{% if name %}
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+        <div class="alert alert-dark" role="alert">
+            <center> <h5>Classification Report</h5>
+                <h1>Classified As {{name|capfirst}}</h1></center>
+            </div><br>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Probablity</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for class,probab in probablity %}
+              <tr>
+                <th scope="row">{{class}}</th>
+                <td colspan="2">{{probab}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+    </div>
+</div>
+{% else %}
+{% if not new%}
+<div class="alert alert-warning" role="alert">
+    <center> <h5>Couldnt classify properly as <b>Two Eye were not Visible</b> </h5></center>
+    </div>
+    {% endif %}
+
+    {% endif %}
+{% endblock %}

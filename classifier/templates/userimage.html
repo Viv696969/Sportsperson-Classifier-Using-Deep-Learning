@@ -1,0 +1,56 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<br>
+<div class="alert alert-light" role="alert">
+  <center> <h5>Classify your fav img</h5></center>
+  </div><br>
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="input-group">
+        <input type="file" class="form-control" iaria-describedby="inputGroupFileAddon04" name="user_upload_image">
+        <button class="btn btn-outline-success" type="submit" >classify</button>
+      </div>
+</form>
+</div>
+</div>
+<br>
+{% if name %}
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+        <div class="alert alert-dark" role="alert">
+            <center> <h5>Classification Report</h5>
+                <h1>Classified As {{name|capfirst}}</h1></center>
+            </div><br>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Probablity</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for class,probab in probablity %}
+              <tr>
+                <th scope="row">{{class}}</th>
+                <td colspan="2">{{probab}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+    </div>
+</div>
+{% else %}
+{% if not new %}
+<div class="alert alert-warning" role="alert">
+    <center> <h5>Couldnt classify properly as <b>Two Eyes were not Visible</b> </h5></center>
+    </div>
+    {% endif %}
+    {% endif %}
+
+
+{% endblock %}
