@@ -1,5 +1,7 @@
 # Sports Celebrity Image Classification Website using Tensorflow ,Keras and Django
-•	Collection of multiple images of 6 sport celebrities from google.
+
+
+* Collection of multiple images of 6 sport celebrities from google.
 •	Using Haar Cascades from OpenCv – Python extracted only the faces of the celebrities.
 •	Converted images to array and splited the data in training and testing using sklearn library.
 •	Using Tensorflow-Keras created a CNN model.
